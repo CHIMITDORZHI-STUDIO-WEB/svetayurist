@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -15,480 +15,1576 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/phosphor-icons"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <!-- Custom Config -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            DEFAULT: '#1a2a44',
-                            light: '#2a3d5e',
-                            dark: '#101a2b',
-                            deep: '#0f172a'
-                        },
-                        charcoal: '#2d2d2d',
-                        gold: {
-                            DEFAULT: '#c5a059',
-                            light: '#d4b675',
-                            dark: '#a88645'
-                        },
-                        offwhite: '#f9f9f9',
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Montserrat"', 'sans-serif'],
-                    },
-                    container: {
-                        center: true,
-                        padding: '1.5rem',
-                    },
-                    boxShadow: {
-                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
-                        'glow': '0 0 20px rgba(197, 160, 89, 0.3)',
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
+        html {
+            scroll-behavior: smooth;
         }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .glass-panel {
-                @apply bg-white/80 backdrop-blur-md border border-white/20 dark:bg-navy-dark/80 dark:border-white/10;
-            }
-            /* SAFE ANIMATION: Default is VISIBLE. JS adds hidden state only if it runs. */
-            .reveal-on-scroll {
-                @apply transition-all duration-1000 ease-out;
-            }
-            .js-hidden {
-                @apply opacity-0 translate-y-8;
-            }
-            .reveal-visible {
-                @apply opacity-100 translate-y-0 !important;
-            }
+
+        :root {
+            --navy: #1a2a44;
+            --navy-light: #2a3d5e;
+            --navy-dark: #101a2b;
+            --navy-deep: #0f172a;
+            --charcoal: #2d2d2d;
+            --gold: #c5a059;
+            --gold-light: #d4b675;
+            --gold-dark: #a88645;
+            --offwhite: #f9f9f9;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --tg-blue: #2AABEE;
+
+            /* Dark mode vars (toggled via JS) */
+            --bg: var(--offwhite);
+            --bg-card: var(--white);
+            --bg-card-alt: var(--offwhite);
+            --text: var(--charcoal);
+            --text-heading: var(--navy);
+            --text-muted: var(--gray-600);
+            --text-light: var(--gray-500);
+            --border: var(--gray-100);
+            --header-bg: rgba(255, 255, 255, 0.95);
         }
-        
-        /* Custom Scrollbar */
+
+        html.dark {
+            --bg: var(--navy-deep);
+            --bg-card: var(--navy-dark);
+            --bg-card-alt: var(--navy-deep);
+            --text: #e2e8f0;
+            --text-heading: var(--white);
+            --text-muted: #94a3b8;
+            --text-light: #64748b;
+            --border: rgba(255, 255, 255, 0.05);
+            --header-bg: rgba(16, 26, 43, 0.95);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        /* ===== UTILITY ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gold {
+            color: var(--gold);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: var(--bg);
         }
-        .dark ::-webkit-scrollbar-track {
-            background: #101a2b;
-        }
+
         ::-webkit-scrollbar-thumb {
-            background: #c5a059;
+            background: var(--gold);
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a88645;
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: padding 0.3s, background 0.3s;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header.scrolled .header-inner {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--navy);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 2px;
+        }
+
+        html.dark .logo-icon {
+            background: var(--navy-deep);
+            border-color: rgba(197, 160, 89, 0.5);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-heading);
+            letter-spacing: 0.05em;
+            line-height: 1;
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-light);
+        }
+
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .svo-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dc2626;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-phone {
+            font-weight: 500;
+            color: var(--text-heading);
+            transition: color 0.3s;
+        }
+
+        .header-phone:hover {
+            color: var(--gold);
+        }
+
+        html.dark .header-phone {
+            color: white;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 32px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--navy);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold);
+            box-shadow: 0 4px 20px rgba(197, 160, 89, 0.3);
+            transform: translateY(-2px);
+        }
+
+        html.dark .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        html.dark .btn-primary:hover {
+            background: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-heading);
+            border: 1px solid var(--gray-300);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--navy);
+            background: rgba(26, 42, 68, 0.05);
+        }
+
+        html.dark .btn-outline {
+            color: var(--gray-300);
+            border-color: var(--gray-600);
+        }
+
+        html.dark .btn-outline:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-sm {
+            padding: 10px 24px;
+            font-size: 14px;
+        }
+
+        .theme-toggle {
+            padding: 8px;
+            border-radius: 50%;
+            color: var(--text-heading);
+            transition: background 0.3s, color 0.3s;
+            font-size: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gray-100);
+        }
+
+        html.dark .theme-toggle {
+            color: var(--gold);
+        }
+
+        html.dark .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile */
+        .mobile-controls {
+            display: none;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .mobile-menu-btn {
+            color: var(--text-heading);
+            font-size: 24px;
+        }
+
+        html.dark .mobile-menu-btn {
+            color: white;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            font-weight: 500;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+
+            .nav-desktop,
+            .header-actions {
+                display: none !important;
+            }
+
+            .mobile-controls {
+                display: flex;
+            }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100svh;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 48px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(243, 244, 246, 0.5);
+            transform: skewX(-12deg) translateX(128px);
+            z-index: -1;
+        }
+
+        html.dark .hero-bg {
+            background: rgba(26, 42, 68, 0.3);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 7fr 5fr;
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(26, 42, 68, 0.05);
+            border: 1px solid rgba(26, 42, 68, 0.1);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-heading);
+            margin-bottom: 24px;
+        }
+
+        html.dark .hero-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--gray-300);
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: clamp(36px, 8vw, 72px);
+            line-height: 1.1;
+            color: var(--text-heading);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .gold-italic {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 540px;
+            line-height: 1.7;
+            border-left: 4px solid var(--gold);
+            padding-left: 24px;
+            margin-bottom: 32px;
+        }
+
+        .hero-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .hero-stats i {
+            font-size: 24px;
+            color: var(--gold);
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .hero-portrait {
+            position: relative;
+        }
+
+        .hero-portrait img {
+            width: 100%;
+            border-radius: 16px;
+            border: 8px solid var(--bg-card);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        html.dark .hero-portrait img {
+            border-color: var(--navy-light);
+        }
+
+        .hero-portrait-overlay {
+            position: absolute;
+            inset: 8px;
+            border-radius: 12px;
+            background: linear-gradient(to top, rgba(26, 42, 68, 0.6), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+            display: flex;
+            align-items: flex-end;
+            padding: 32px;
+            color: white;
+        }
+
+        .hero-portrait:hover .hero-portrait-overlay {
+            opacity: 1;
+        }
+
+        .hero-portrait-deco1 {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 128px;
+            height: 128px;
+            border: 2px solid rgba(197, 160, 89, 0.3);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-portrait-deco2 {
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            width: 192px;
+            height: 192px;
+            background: rgba(26, 42, 68, 0.05);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+
+            .hero-portrait-deco1,
+            .hero-portrait-deco2 {
+                display: none;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 80px 0;
+            background: var(--bg-card);
+            transition: background 0.3s;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 768px;
+            margin: 0 auto 64px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 48px);
+            color: var(--text-heading);
+            margin-bottom: 16px;
+        }
+
+        .section-divider {
+            width: 96px;
+            height: 4px;
+            background: var(--gold);
+            margin: 0 auto 24px;
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        @media (max-width: 400px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            padding: 32px;
+            border: 1px solid var(--border);
+            background: var(--bg-card-alt);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            background: var(--bg-card);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        html.dark .service-card:hover {
+            background: var(--navy-light);
+        }
+
+        .service-card-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.3s;
+        }
+
+        .service-card:hover .service-card-bar {
+            height: 100%;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            background: rgba(26, 42, 68, 0.05);
+            color: var(--navy);
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        html.dark .service-icon {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--gold);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--navy);
+            color: var(--gold);
+        }
+
+        html.dark .service-card:hover .service-icon {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .service-card ul {
+            margin-bottom: 24px;
+        }
+
+        .service-card li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+            padding: 4px 0;
+        }
+
+        .service-card li i {
+            color: var(--gold);
+        }
+
+        .service-card .card-link {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-heading);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.3s;
+        }
+
+        .service-card .card-link:hover {
+            color: var(--gold);
+        }
+
+        html.dark .service-card .card-link {
+            color: var(--gold);
+        }
+
+        html.dark .service-card .card-link:hover {
+            color: white;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 80px 0;
+            background: var(--navy);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        html.dark .about {
+            background: var(--navy-deep);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 48px);
+            margin-bottom: 24px;
+        }
+
+        .about-divider {
+            width: 64px;
+            height: 4px;
+            background: var(--gold);
+            margin-bottom: 24px;
+            border-radius: 2px;
+        }
+
+        .about p {
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .about blockquote {
+            border-left: 4px solid var(--gold);
+            padding-left: 24px;
+            font-style: italic;
+            font-size: 20px;
+            color: #e2e8f0;
+            margin-top: 24px;
+        }
+
+        .principles-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .principles-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--gold);
+            margin-bottom: 24px;
+        }
+
+        .principle {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .principle:last-child {
+            margin-bottom: 0;
+        }
+
+        .principle-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 24px;
+            color: var(--gold);
+        }
+
+        .principle h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .principle p {
+            font-size: 14px;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* ===== SVO ===== */
+        .svo-section {
+            padding: 80px 0;
+            background: var(--gray-50);
+            transition: background 0.3s;
+        }
+
+        html.dark .svo-section {
+            background: var(--navy-dark);
+        }
+
+        .svo-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .svo-card {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .svo-content {
+            padding: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .svo-content {
+                padding: 56px;
+            }
+        }
+
+        .svo-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #fef2f2;
+            color: #b91c1c;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        html.dark .svo-badge {
+            background: rgba(185, 28, 28, 0.2);
+            color: #f87171;
+        }
+
+        .svo-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 36px);
+            color: var(--text-heading);
+            margin-bottom: 16px;
+        }
+
+        .svo-content>p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .svo-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .svo-list i {
+            font-size: 24px;
+            color: #dc2626;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        html.dark .svo-list i {
+            color: #f87171;
+        }
+
+        .svo-list strong {
+            color: var(--text-heading);
+            display: block;
+        }
+
+        .svo-list span {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .svo-cta {
+            background: var(--navy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        html.dark .svo-cta {
+            background: rgba(42, 61, 94, 0.2);
+        }
+
+        .svo-cta i.main-icon {
+            font-size: 72px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .svo-cta h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .svo-cta p {
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--navy);
+            padding: 12px 32px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* ===== MAKS SECTION ===== */
+        .maks-section {
+            padding: 64px 0;
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        html.dark .maks-section {
+            background: var(--navy-deep);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .maks-icon-wrap {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 24px;
+        }
+
+        .maks-icon-wrap i {
+            font-size: 36px;
+            color: var(--gold);
+        }
+
+        .maks-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 36px);
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .maks-divider {
+            width: 128px;
+            height: 1px;
+            background: rgba(197, 160, 89, 0.5);
+            margin: 0 auto 24px;
+        }
+
+        .maks-section p {
+            font-size: 20px;
+            color: #cbd5e1;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        /* ===== FOOTER / CONTACTS ===== */
+        .footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        html.dark .footer {
+            background: var(--navy-dark);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 5fr 7fr;
+            }
+        }
+
+        .footer h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .footer .subtitle {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .footer>.container>.footer-grid>div:first-child>p {
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 20px;
+            color: var(--gold);
+        }
+
+        .contact-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-300);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .contact-value:hover {
+            color: var(--gold);
+        }
+
+        .messenger-panel {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .messenger-panel {
+                padding: 48px;
+            }
+        }
+
+        .messenger-panel h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .messenger-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 500px) {
+            .messenger-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .messenger-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s;
+        }
+
+        .messenger-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .messenger-btn i {
+            font-size: 48px;
+            transition: color 0.3s;
+        }
+
+        .messenger-btn .m-label {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .messenger-btn .m-sub {
+            font-size: 12px;
+            color: var(--gray-400);
+            transition: color 0.3s;
+        }
+
+        .messenger-tg {
+            background: rgba(42, 171, 238, 0.1);
+            border-color: rgba(42, 171, 238, 0.3);
+        }
+
+        .messenger-tg i {
+            color: var(--tg-blue);
+        }
+
+        .messenger-tg:hover {
+            background: var(--tg-blue);
+        }
+
+        .messenger-tg:hover i,
+        .messenger-tg:hover .m-sub {
+            color: white;
+        }
+
+        .messenger-maks {
+            background: rgba(197, 160, 89, 0.1);
+            border-color: rgba(197, 160, 89, 0.3);
+        }
+
+        .messenger-maks-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(197, 160, 89, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .messenger-maks-icon i {
+            font-size: 30px;
+            color: var(--gold);
+        }
+
+        .messenger-maks:hover {
+            background: var(--gold);
+        }
+
+        .messenger-maks:hover .messenger-maks-icon {
+            background: white;
+        }
+
+        .messenger-maks:hover .m-sub {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .channel-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-top: 24px;
+            transition: color 0.3s;
+        }
+
+        .channel-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            font-size: 14px;
+            text-align: center;
+            color: var(--gray-500);
+            margin-top: 24px;
+        }
+
+        /* Map */
+        .map-wrap {
+            width: 100%;
+            height: 256px;
+            background: var(--gray-800);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 48px;
+            border: 1px solid var(--gray-700);
+            filter: grayscale(100%);
+            transition: filter 0.7s;
+        }
+
+        .map-wrap:hover {
+            filter: grayscale(0%);
+        }
+
+        html.dark .map-wrap {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            padding-top: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        html.dark .footer-bottom {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom a {
+            transition: color 0.3s;
+        }
+
+        .footer-bottom a:hover {
+            color: white;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.hidden-anim {
+            opacity: 0;
+            transform: translateY(30px);
         }
     </style>
 </head>
 
-<body
-    class="bg-offwhite text-charcoal font-sans antialiased selection:bg-gold selection:text-white dark:bg-navy-deep dark:text-gray-100 transition-colors duration-300">
+<body>
 
     <!-- Header -->
-    <header
-        class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-sm dark:bg-navy-dark/95 dark:border-b dark:border-white/5"
-        id="header">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-3 group">
-                <div
-                    class="w-10 h-10 bg-navy text-gold flex items-center justify-center rounded-sm font-serif text-xl font-bold border border-gold/30 dark:bg-navy-deep dark:border-gold/50">
-                    А
-                </div>
-                <div class="flex flex-col">
-                    <span
-                        class="font-serif text-lg font-bold text-navy tracking-wide leading-none group-hover:text-gold transition-colors dark:text-gray-100">АЮШИЕВА
-                        С.Ж.</span>
-                    <span class="text-[10px] uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">Адвокат</span>
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">А</div>
+                <div>
+                    <div class="logo-text">АЮШИЕВА С.Ж.</div>
+                    <div class="logo-sub">Адвокат</div>
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700 dark:text-gray-300">
-                <a href="#services" class="hover:text-gold transition-colors py-2 relative group">
-                    Услуги
-                    <span
-                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#about" class="hover:text-gold transition-colors py-2 relative group">
-                    Обо мне
-                    <span
-                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#svo" class="hover:text-gold transition-colors py-2 relative group flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
-                    СВО
-                    <span
-                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#contacts" class="hover:text-gold transition-colors py-2 relative group">
-                    Контакты
-                    <span
-                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
+            <nav class="nav-desktop">
+                <a href="#services" class="nav-link">Услуги</a>
+                <a href="#about" class="nav-link">Обо мне</a>
+                <a href="#svo" class="nav-link"><span class="svo-dot"></span>СВО</a>
+                <a href="#contacts" class="nav-link">Контакты</a>
             </nav>
 
-            <div class="hidden md:flex items-center gap-6">
-                <!-- Theme Toggle -->
-                <button id="theme-toggle"
-                    class="p-2 rounded-full text-navy hover:bg-gray-100 dark:text-gold dark:hover:bg-white/10 transition-colors"
-                    title="Переключить тему">
-                    <i id="theme-icon" class="ph ph-moon text-xl"></i>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Переключить тему">
+                    <i class="ph ph-moon" id="theme-icon"></i>
                 </button>
-
-                <a href="tel:89955538583"
-                    class="font-medium text-navy hover:text-gold transition-colors dark:text-white">8-995-553-85-83</a>
-                <a href="https://t.me/svetayurist" target="_blank"
-                    class="bg-navy text-white px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-gold transition-all duration-300 shadow-lg hover:shadow-gold/30 transform hover:-translate-y-0.5 dark:bg-gold dark:text-navy dark:hover:bg-white">
-                    Записаться
-                </a>
+                <a href="tel:89955538583" class="header-phone">8-995-553-85-83</a>
+                <a href="https://t.me/svetayurist" target="_blank" class="btn btn-primary btn-sm">Записаться</a>
             </div>
 
-            <!-- Mobile Menu Button & Theme Toggle -->
-            <div class="md:hidden flex items-center gap-4">
-                <button id="theme-toggle-mobile" class="text-navy dark:text-gold">
-                    <i id="theme-icon-mobile" class="ph ph-moon text-2xl"></i>
+            <div class="mobile-controls">
+                <button class="theme-toggle" id="theme-toggle-mobile" title="Тема">
+                    <i class="ph ph-moon" id="theme-icon-mobile"></i>
                 </button>
-                <button class="text-navy dark:text-white p-2" id="mobile-menu-btn">
-                    <i class="ph ph-list text-2xl"></i>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="ph ph-list"></i>
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div class="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg transform origin-top scale-y-0 transition-transform duration-300 dark:bg-navy-dark dark:border-white/10"
-            id="mobile-menu">
-            <div class="p-4 flex flex-col gap-4">
-                <a href="#services"
-                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 dark:text-gray-200 dark:border-white/5">Услуги</a>
-                <a href="#about"
-                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 dark:text-gray-200 dark:border-white/5">Обо
-                    мне</a>
-                <a href="#svo"
-                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 flex items-center gap-2 dark:text-gray-200 dark:border-white/5">
-                    СВО <span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full">Важно</span>
-                </a>
-                <a href="#contacts"
-                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 dark:text-gray-200 dark:border-white/5">Контакты</a>
-                <a href="tel:89955538583" class="text-navy font-bold py-2 dark:text-gold">8-995-553-85-83</a>
-            </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#services">Услуги</a>
+            <a href="#about">Обо мне</a>
+            <a href="#svo">СВО</a>
+            <a href="#contacts">Контакты</a>
+            <a href="tel:89955538583" style="color:var(--gold);font-weight:700;">8-995-553-85-83</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="min-h-[100svh] pt-24 pb-12 flex items-center relative overflow-hidden dark:bg-navy-deep">
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-gray-100/50 -skew-x-12 translate-x-32 -z-10 dark:bg-navy/30">
-        </div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -z-10 dark:bg-gold/10"></div>
-
-        <div class="container mx-auto px-4 grid md:grid-cols-12 gap-12 items-center">
-            <div class="md:col-span-7 space-y-8 reveal-on-scroll">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy/5 text-navy text-xs font-semibold tracking-wider uppercase border border-navy/10 dark:bg-white/10 dark:text-gray-200 dark:border-white/20">
-                    <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-                    Читинская городская коллегия адвокатов
-                </div>
-
-                <h1
-                    class="font-serif text-4xl md:text-6xl lg:text-7xl text-navy font-medium leading-tight dark:text-white">
-                    Аюшиева <br>
-                    <span class="text-gold italic relative pr-4">
-                        Светлана
-                        <svg class="absolute bottom-2 right-0 w-full h-3 text-gold/20 -z-10" viewBox="0 0 100 10"
-                            preserveAspectRatio="none">
-                            <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z" fill="currentColor"></path>
-                        </svg>
-                    </span> <br>
-                    Жадамбаевна
-                </h1>
-
-                <p
-                    class="text-lg md:text-xl text-gray-600 max-w-xl leading-relaxed border-l-4 border-gold pl-6 dark:text-gray-300">
-                    Профессиональная юридическая защита в Чите и Забайкальском крае. Весь спектр юридических услуг: от
-                    консультаций до сложных судебных процессов.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="bg-navy text-white px-8 py-4 rounded-sm font-medium hover:bg-gold transition-all duration-300 shadow-xl hover:shadow-gold/30 text-center flex items-center justify-center gap-2 group dark:bg-gold dark:text-navy dark:hover:bg-white">
-                        Записаться на консультацию
-                        <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                    <a href="#services"
-                        class="bg-transparent border border-gray-300 text-navy px-8 py-4 rounded-sm font-medium hover:border-navy hover:bg-navy/5 transition-all duration-300 text-center dark:border-gray-600 dark:text-gray-200 dark:hover:bg-white/5 dark:hover:border-white">
-                        Узнать подробнее
-                    </a>
-                </div>
-
-                <div class="pt-8 flex items-center gap-8 text-sm text-gray-500 font-medium dark:text-gray-400">
-                    <div class="flex items-center gap-2">
-                        <i class="ph ph-scales text-2xl text-gold"></i>
-                        <span>15+ лет опыта</span>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="reveal">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Читинская городская коллегия адвокатов
                     </div>
-                    <div class="flex items-center gap-2">
-                        <i class="ph ph-gavel text-2xl text-gold"></i>
-                        <span>98% успешных дел</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="md:col-span-5 relative reveal-on-scroll" style="transition-delay: 200ms;">
-                <div
-                    class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-navy-light">
-                    <img src="portrait.jpg" alt="Адвокат Аюшиева С.Ж." class="w-full h-auto object-cover aspect-[3/4]">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                        <div class="text-white">
-                            <p class="font-serif text-2xl">Ваш защитник</p>
-                            <p class="text-sm opacity-90">На страже ваших интересов</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Decorative Elements -->
-                <div class="absolute -top-10 -right-10 w-32 h-32 border-2 border-gold/30 rounded-full z-0"></div>
-                <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-navy/5 rounded-full z-0 dark:bg-white/5"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-white dark:bg-navy-dark transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
-                <h2 class="font-serif text-3xl md:text-5xl text-navy mb-4 dark:text-white">Экспертиза и Услуги</h2>
-                <div class="w-24 h-1 bg-gold mx-auto mb-6"></div>
-                <p class="text-gray-600 text-lg dark:text-gray-400">Комплексный подход к решению правовых вопросов любой
-                    сложности</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Cards -->
-                <div
-                    class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light">
-                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
-                    </div>
-                    <div
-                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
-                        <i class="ph ph-users-three text-2xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Семейное право</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Развод, раздел имущества, алименты,
-                        споры о детях. Деликатное решение семейных конфликтов.</p>
-                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Бракоразводные
-                            процессы</li>
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Алиментные
-                            обязательства</li>
-                    </ul>
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
-                        Записаться <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
-                    style="transition-delay: 100ms;">
-                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
-                    </div>
-                    <div
-                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
-                        <i class="ph ph-house-line text-2xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Жилищные и земельные споры
-                    </h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Приватизация, границы участков, споры
-                        о собственности, выселение, регистрация прав.</p>
-                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Сделки с недвижимостью
-                        </li>
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Споры с застройщиками
-                        </li>
-                    </ul>
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
-                        Записаться <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
-                    style="transition-delay: 200ms;">
-                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
-                    </div>
-                    <div
-                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
-                        <i class="ph ph-briefcase text-2xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Трудовые споры</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Восстановление на работе, взыскание
-                        задолженности по зарплате, защита прав работников.</p>
-                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Незаконное увольнение
-                        </li>
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Компенсации</li>
-                    </ul>
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
-                        Записаться <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div
-                    class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light">
-                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
-                    </div>
-                    <div
-                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
-                        <i class="ph ph-gavel text-2xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Уголовная защита</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Защита на стадии следствия, дознания и
-                        в суде. Профессиональная поддержка в сложных ситуациях.</p>
-                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Следственные действия
-                        </li>
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Судебное
-                            представительство</li>
-                    </ul>
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
-                        Записаться <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
-                    style="transition-delay: 100ms;">
-                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
-                    </div>
-                    <div
-                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
-                        <i class="ph ph-scroll text-2xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Наследственные дела</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Оформление наследства, оспаривание
-                        завещаний, восстановление сроков, защита прав наследников.</p>
-                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Споры между
-                            наследниками</li>
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Нотариальные вопросы
-                        </li>
-                    </ul>
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
-                        Записаться <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
-                    style="transition-delay: 200ms;">
-                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
-                    </div>
-                    <div
-                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
-                        <i class="ph ph-bank text-2xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Кредитные споры</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Долговые обязательства, споры с
-                        банками, банкротство физических лиц, защита от коллекторов.</p>
-                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Снижение неустоек</li>
-                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Реструктуризация</li>
-                    </ul>
-                    <a href="https://t.me/svetayurist" target="_blank"
-                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
-                        Записаться <i class="ph ph-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about"
-        class="py-20 bg-navy text-white relative overflow-hidden dark:bg-navy-deep dark:border-t dark:border-white/5">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5">
-        </div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6 reveal-on-scroll">
-                    <h2 class="font-serif text-3xl md:text-5xl mb-6">Обо мне</h2>
-                    <div class="w-16 h-1 bg-gold mb-6"></div>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Я практикующий адвокат с большим опытом работы в сфере гражданского и уголовного права. Уже
-                        много лет я помогаю людям решать правовые вопросы, защищаю их интересы в судах и государственных
-                        органах.
+                    <h1 class="serif">
+                        Аюшиева<br>
+                        <span class="gold-italic">Светлана</span><br>
+                        Жадамбаевна
+                    </h1>
+                    <p class="hero-desc">
+                        Профессиональная юридическая защита в Чите и Забайкальском крае. Весь спектр юридических услуг:
+                        от консультаций до сложных судебных процессов.
                     </p>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Моя главная цель — защита интересов клиентов и достижение результата. Я всегда предлагаю
-                        индивидуальный подход, внимательно изучаю детали дела и нахожу оптимальное решение.
+                    <div class="hero-btns">
+                        <a href="https://t.me/svetayurist" target="_blank" class="btn btn-primary">
+                            Записаться на консультацию
+                            <i class="ph ph-arrow-right"></i>
+                        </a>
+                        <a href="#services" class="btn btn-outline">Узнать подробнее</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div><i class="ph ph-scales"></i><span>15+ лет опыта</span></div>
+                        <div><i class="ph ph-gavel"></i><span>98% успешных дел</span></div>
+                    </div>
+                </div>
+                <div class="hero-portrait reveal" style="transition-delay:0.2s">
+                    <img src="portrait.jpg" alt="Адвокат Аюшиева С.Ж.">
+                    <div class="hero-portrait-overlay">
+                        <div>
+                            <p class="serif" style="font-size:24px;">Ваш защитник</p>
+                            <p style="font-size:14px;opacity:0.9;">На страже ваших интересов</p>
+                        </div>
+                    </div>
+                    <div class="hero-portrait-deco1"></div>
+                    <div class="hero-portrait-deco2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="serif">Экспертиза и Услуги</h2>
+                <div class="section-divider"></div>
+                <p>Комплексный подход к решению правовых вопросов любой сложности</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-card-bar"></div>
+                    <div class="service-icon"><i class="ph ph-users-three"></i></div>
+                    <h3>Семейное право</h3>
+                    <p>Развод, раздел имущества, алименты, споры о детях. Деликатное решение семейных конфликтов.</p>
+                    <ul>
+                        <li><i class="ph ph-check"></i> Бракоразводные процессы</li>
+                        <li><i class="ph ph-check"></i> Алиментные обязательства</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank" class="card-link">Записаться <i
+                            class="ph ph-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.1s">
+                    <div class="service-card-bar"></div>
+                    <div class="service-icon"><i class="ph ph-house-line"></i></div>
+                    <h3>Жилищные и земельные споры</h3>
+                    <p>Приватизация, границы участков, споры о собственности, выселение, регистрация прав.</p>
+                    <ul>
+                        <li><i class="ph ph-check"></i> Сделки с недвижимостью</li>
+                        <li><i class="ph ph-check"></i> Споры с застройщиками</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank" class="card-link">Записаться <i
+                            class="ph ph-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.2s">
+                    <div class="service-card-bar"></div>
+                    <div class="service-icon"><i class="ph ph-briefcase"></i></div>
+                    <h3>Трудовые споры</h3>
+                    <p>Восстановление на работе, взыскание задолженности по зарплате, защита прав работников.</p>
+                    <ul>
+                        <li><i class="ph ph-check"></i> Незаконное увольнение</li>
+                        <li><i class="ph ph-check"></i> Компенсации</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank" class="card-link">Записаться <i
+                            class="ph ph-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-card-bar"></div>
+                    <div class="service-icon"><i class="ph ph-gavel"></i></div>
+                    <h3>Уголовная защита</h3>
+                    <p>Защита на стадии следствия, дознания и в суде. Профессиональная поддержка в сложных ситуациях.
                     </p>
-                    <div class="pt-6">
-                        <blockquote class="border-l-4 border-gold pl-6 italic text-xl text-gray-200">
-                            "Я всегда ориентируюсь на результат, внимательно подхожу к каждому делу и ставлю на первое
-                            место защиту интересов клиента."
-                        </blockquote>
-                    </div>
+                    <ul>
+                        <li><i class="ph ph-check"></i> Следственные действия</li>
+                        <li><i class="ph ph-check"></i> Судебное представительство</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank" class="card-link">Записаться <i
+                            class="ph ph-arrow-right"></i></a>
                 </div>
-                <div class="relative reveal-on-scroll" style="transition-delay: 200ms;">
-                    <div class="bg-white/5 backdrop-blur-sm p-8 rounded-sm border border-white/10">
-                        <h3 class="font-serif text-2xl mb-6 text-gold">Мои принципы</h3>
-                        <div class="space-y-6">
-                            <div class="flex gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gold/20 flex items-center justify-center rounded-full shrink-0">
-                                    <i class="ph ph-shield-check text-2xl text-gold"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-lg">Честность и Доверие</h4>
-                                    <p class="text-sm text-gray-400 mt-1">Открытый диалог с клиентом о перспективах
-                                        дела.</p>
-                                </div>
+                <div class="service-card reveal" style="transition-delay:0.1s">
+                    <div class="service-card-bar"></div>
+                    <div class="service-icon"><i class="ph ph-scroll"></i></div>
+                    <h3>Наследственные дела</h3>
+                    <p>Оформление наследства, оспаривание завещаний, восстановление сроков, защита прав наследников.</p>
+                    <ul>
+                        <li><i class="ph ph-check"></i> Споры между наследниками</li>
+                        <li><i class="ph ph-check"></i> Нотариальные вопросы</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank" class="card-link">Записаться <i
+                            class="ph ph-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.2s">
+                    <div class="service-card-bar"></div>
+                    <div class="service-icon"><i class="ph ph-bank"></i></div>
+                    <h3>Кредитные споры</h3>
+                    <p>Долговые обязательства, споры с банками, банкротство физических лиц, защита от коллекторов.</p>
+                    <ul>
+                        <li><i class="ph ph-check"></i> Снижение неустоек</li>
+                        <li><i class="ph ph-check"></i> Реструктуризация</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank" class="card-link">Записаться <i
+                            class="ph ph-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <h2>Обо мне</h2>
+                    <div class="about-divider"></div>
+                    <p>Я практикующий адвокат с большим опытом работы в сфере гражданского и уголовного права. Уже много
+                        лет я помогаю людям решать правовые вопросы, защищаю их интересы в судах и государственных
+                        органах.</p>
+                    <p>Моя главная цель — защита интересов клиентов и достижение результата. Я всегда предлагаю
+                        индивидуальный подход, внимательно изучаю детали дела и нахожу оптимальное решение.</p>
+                    <blockquote>"Я всегда ориентируюсь на результат, внимательно подхожу к каждому делу и ставлю на
+                        первое место защиту интересов клиента."</blockquote>
+                </div>
+                <div class="reveal" style="transition-delay:0.2s">
+                    <div class="principles-card">
+                        <h3>Мои принципы</h3>
+                        <div class="principle">
+                            <div class="principle-icon"><i class="ph ph-shield-check"></i></div>
+                            <div>
+                                <h4>Честность и Доверие</h4>
+                                <p>Открытый диалог с клиентом о перспективах дела.</p>
                             </div>
-                            <div class="flex gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gold/20 flex items-center justify-center rounded-full shrink-0">
-                                    <i class="ph ph-lock-key text-2xl text-gold"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-lg">Конфиденциальность</h4>
-                                    <p class="text-sm text-gray-400 mt-1">Полная защита информации и адвокатская тайна.
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="principle">
+                            <div class="principle-icon"><i class="ph ph-lock-key"></i></div>
+                            <div>
+                                <h4>Конфиденциальность</h4>
+                                <p>Полная защита информации и адвокатская тайна.</p>
                             </div>
-                            <div class="flex gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gold/20 flex items-center justify-center rounded-full shrink-0">
-                                    <i class="ph ph-target text-2xl text-gold"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-lg">Результативность</h4>
-                                    <p class="text-sm text-gray-400 mt-1">Работа на достижение конкретных целей клиента.
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="principle">
+                            <div class="principle-icon"><i class="ph ph-target"></i></div>
+                            <div>
+                                <h4>Результативность</h4>
+                                <p>Работа на достижение конкретных целей клиента.</p>
                             </div>
                         </div>
                     </div>
@@ -497,303 +1593,184 @@
         </div>
     </section>
 
-    <!-- SVO Support Section -->
-    <section id="svo" class="py-20 bg-gray-50 relative dark:bg-navy-dark transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div
-                class="reveal-on-scroll bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:bg-navy-deep dark:border-white/10">
-                <div class="grid md:grid-cols-2">
-                    <div class="p-10 md:p-14 space-y-6">
-                        <div
-                            class="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-sm font-bold uppercase tracking-wider mb-2 dark:bg-red-900/30 dark:text-red-400">
-                            Особое внимание
-                        </div>
-                        <h2 class="font-serif text-3xl md:text-4xl text-navy dark:text-white">Поддержка участников СВО
-                        </h2>
-                        <p class="text-gray-600 text-lg dark:text-gray-300">
-                            Оказываю квалифицированную юридическую помощь участникам специальной военной операции и их
-                            семьям. Полное сопровождение в получении положенных льгот и выплат.
-                        </p>
-
-                        <ul class="space-y-4 pt-4">
-                            <li class="flex items-start gap-3">
-                                <i
-                                    class="ph ph-check-circle text-2xl text-red-600 shrink-0 mt-0.5 dark:text-red-500"></i>
-                                <div>
-                                    <strong class="text-navy block dark:text-gray-200">Выплаты по ранению</strong>
-                                    <span class="text-sm text-gray-500 dark:text-gray-400">Помощь в оформлении и
-                                        получении страховых выплат.</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i
-                                    class="ph ph-check-circle text-2xl text-red-600 shrink-0 mt-0.5 dark:text-red-500"></i>
-                                <div>
-                                    <strong class="text-navy block dark:text-gray-200">Статус ветерана боевых
-                                        действий</strong>
-                                    <span class="text-sm text-gray-500 dark:text-gray-400">Сбор документов и
-                                        представление интересов.</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i
-                                    class="ph ph-check-circle text-2xl text-red-600 shrink-0 mt-0.5 dark:text-red-500"></i>
-                                <div>
-                                    <strong class="text-navy block dark:text-gray-200">Социальные гарантии</strong>
-                                    <span class="text-sm text-gray-500 dark:text-gray-400">Кредитные каникулы, льготы
-                                        для семей, выплаты в случае гибели.</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div
-                        class="bg-navy relative overflow-hidden flex items-center justify-center p-12 dark:bg-navy-light/20">
-                        <div
-                            class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]">
-                        </div>
-                        <div class="relative z-10 text-center text-white space-y-6">
-                            <i class="ph ph-hand-heart text-7xl text-gold mb-4"></i>
-                            <h3 class="font-serif text-2xl">Ваша защита — наш долг</h3>
-                            <p class="opacity-80">
-                                Юридическая поддержка тех, кто защищает Родину.
-                            </p>
-                            <a href="https://t.me/svetayurist" target="_blank"
-                                class="inline-block bg-white text-navy px-8 py-3 rounded-full font-bold hover:bg-gold hover:text-white transition-all duration-300">
-                                Получить консультацию
-                            </a>
-                        </div>
-                    </div>
+    <!-- SVO -->
+    <section id="svo" class="svo-section">
+        <div class="container">
+            <div class="svo-card reveal">
+                <div class="svo-content">
+                    <div class="svo-badge">Особое внимание</div>
+                    <h2>Поддержка участников СВО</h2>
+                    <p>Оказываю квалифицированную юридическую помощь участникам специальной военной операции и их
+                        семьям.</p>
+                    <ul class="svo-list">
+                        <li><i class="ph ph-check-circle"></i>
+                            <div><strong>Выплаты по ранению</strong><span>Помощь в оформлении и получении страховых
+                                    выплат.</span></div>
+                        </li>
+                        <li><i class="ph ph-check-circle"></i>
+                            <div><strong>Статус ветерана боевых действий</strong><span>Сбор документов и представление
+                                    интересов.</span></div>
+                        </li>
+                        <li><i class="ph ph-check-circle"></i>
+                            <div><strong>Социальные гарантии</strong><span>Кредитные каникулы, льготы для семей, выплаты
+                                    в случае гибели.</span></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="svo-cta">
+                    <i class="ph ph-hand-heart main-icon"></i>
+                    <h3>Ваша защита — наш долг</h3>
+                    <p>Юридическая поддержка тех, кто защищает Родину.</p>
+                    <a href="https://t.me/svetayurist" target="_blank" class="btn-white">Получить консультацию</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MAKS Secure Communication (Modified) -->
-    <section
-        class="py-16 bg-navy text-white text-center relative overflow-hidden dark:bg-navy-deep dark:border-t dark:border-white/5">
-        <div class="absolute inset-0 bg-gradient-to-r from-navy via-[#2a3d5e] to-navy opacity-90 dark:opacity-50"></div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl mx-auto space-y-8 reveal-on-scroll">
-                <div
-                    class="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-2xl mb-4 backdrop-blur-sm border border-white/20">
-                    <i class="ph ph-shield-check text-4xl text-gold"></i>
-                </div>
-                <h2 class="font-serif text-3xl md:text-4xl text-gold">Безопасность и Конфиденциальность</h2>
-                <div class="h-px w-32 bg-gold/50 mx-auto"></div>
-                <p class="text-xl text-gray-300">
-                    Приоритет моей работы — конфиденциальность. Свяжитесь со мной напрямую через защищенные мессенджеры.
+    <!-- MAKS -->
+    <section class="maks-section">
+        <div class="container">
+            <div class="reveal">
+                <div class="maks-icon-wrap"><i class="ph ph-shield-check"></i></div>
+                <h2>Безопасность и Конфиденциальность</h2>
+                <div class="maks-divider"></div>
+                <p>Приоритет моей работы — конфиденциальность. Свяжитесь со мной напрямую через защищенные мессенджеры.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Contacts (Refactored) -->
-    <footer id="contacts" class="bg-charcoal text-white pt-20 pb-10 dark:bg-navy-dark">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-                <!-- Info -->
-                <div class="lg:col-span-5 space-y-8 reveal-on-scroll">
-                    <div>
-                        <h2 class="font-serif text-3xl mb-2">Аюшиева С.Ж.</h2>
-                        <p class="text-gold tracking-widest text-sm uppercase">Адвокат</p>
+    <!-- Footer / Contacts -->
+    <footer id="contacts" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="reveal">
+                    <h2 class="serif">Аюшиева С.Ж.</h2>
+                    <div class="subtitle">Адвокат</div>
+                    <p>Юридическая помощь в Чите и Забайкальском крае. Честность, профессионализм и индивидуальный
+                        подход к каждому делу.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="ph ph-map-pin"></i></div>
+                        <div>
+                            <div class="contact-label">Адрес офиса</div>
+                            <div class="contact-value">г. Чита, ул. 9 Января, д. 37, оф. 214</div>
+                        </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed">
-                        Юридическая помощь в Чите и Забайкальском крае. Честность, профессионализм и индивидуальный
-                        подход к каждому делу.
-                    </p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center shrink-0">
-                                <i class="ph ph-map-pin text-xl text-gold"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Адрес офиса
-                                </h3>
-                                <p class="text-white">г. Чита, ул. 9 Января, д. 37, оф. 214</p>
-                            </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="ph ph-phone"></i></div>
+                        <div>
+                            <div class="contact-label">Телефоны</div><a href="tel:89955538583" class="contact-value"
+                                style="display:block;">8-995-553-85-83</a><a href="tel:89294812131"
+                                class="contact-value" style="display:block;">8-929-481-21-31</a>
                         </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center shrink-0">
-                                <i class="ph ph-phone text-xl text-gold"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Телефоны</h3>
-                                <div class="space-y-1">
-                                    <a href="tel:89955538583"
-                                        class="block text-white hover:text-gold transition-colors">8-995-553-85-83</a>
-                                    <a href="tel:89294812131"
-                                        class="block text-white hover:text-gold transition-colors">8-929-481-21-31</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center shrink-0">
-                                <i class="ph ph-envelope text-xl text-gold"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Email</h3>
-                                <a href="mailto:cvetlanaayushieva@mail.ru"
-                                    class="text-white hover:text-gold transition-colors">cvetlanaayushieva@mail.ru</a>
-                            </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="ph ph-envelope"></i></div>
+                        <div>
+                            <div class="contact-label">Email</div><a href="mailto:cvetlanaayushieva@mail.ru"
+                                class="contact-value">cvetlanaayushieva@mail.ru</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Action Buttons (Replaced Form) -->
-                <div class="lg:col-span-7 flex items-center">
-                    <div class="w-full bg-white/5 p-8 md:p-12 rounded-sm border border-white/10 reveal-on-scroll"
-                        style="transition-delay: 150ms;">
-                        <h3 class="font-serif text-2xl text-white mb-8 text-center">Связаться удобным способом</h3>
-
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <!-- Telegram Button -->
-                            <a href="https://t.me/svetayurist" target="_blank"
-                                class="group flex flex-col items-center justify-center gap-3 p-6 bg-[#2AABEE]/10 border border-[#2AABEE]/30 rounded-lg hover:bg-[#2AABEE] transition-all duration-300 transform hover:-translate-y-1">
-                                <i
-                                    class="ph ph-telegram-logo text-5xl text-[#2AABEE] group-hover:text-white transition-colors"></i>
-                                <span class="text-lg font-bold text-white">Написать в Telegram</span>
-                                <span class="text-xs text-gray-400 group-hover:text-white/80">@svetayurist</span>
+                <div style="display:flex;align-items:center;">
+                    <div class="messenger-panel reveal" style="width:100%;transition-delay:0.15s">
+                        <h3>Связаться удобным способом</h3>
+                        <div class="messenger-grid">
+                            <a href="https://t.me/svetayurist" target="_blank" class="messenger-btn messenger-tg">
+                                <i class="ph ph-telegram-logo"></i>
+                                <span class="m-label">Написать в Telegram</span>
+                                <span class="m-sub">@svetayurist</span>
                             </a>
-
-                            <!-- MAKS Button -->
-                            <a href="#"
-                                class="group flex flex-col items-center justify-center gap-3 p-6 bg-gold/10 border border-gold/30 rounded-lg hover:bg-gold transition-all duration-300 transform hover:-translate-y-1">
-                                <div
-                                    class="w-12 h-12 flex items-center justify-center rounded-lg bg-gold/20 text-gold group-hover:bg-white group-hover:text-gold transition-colors">
-                                    <i class="ph ph-shield-check text-3xl"></i>
-                                </div>
-                                <span class="text-lg font-bold text-white">Написать в МАКС</span>
-                                <span class="text-xs text-gray-400 group-hover:text-white/80">Защищенная связь</span>
+                            <a href="#" class="messenger-btn messenger-maks">
+                                <div class="messenger-maks-icon"><i class="ph ph-shield-check"></i></div>
+                                <span class="m-label">Написать в МАКС</span>
+                                <span class="m-sub">Защищенная связь</span>
                             </a>
                         </div>
-
-                        <!-- Added Telegram Channel Button (Secondary) -->
-                        <div class="mt-6 text-center">
-                            <a href="https://t.me/asyurist_chat" target="_blank"
-                                class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm hover:underline">
+                        <div style="text-align:center;margin-top:24px;">
+                            <a href="https://t.me/asyurist_chat" target="_blank" class="channel-link">
                                 <i class="ph ph-users"></i> Подписаться на мой канал в Telegram
                             </a>
                         </div>
-
-                        <p class="text-sm text-center text-gray-500 mt-6">
-                            Отвечаю на сообщения в рабочее время с 09:00 до 18:00
-                        </p>
+                        <div class="footer-note">Отвечаю на сообщения в рабочее время с 09:00 до 18:00</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Map Placeholder -->
-            <div
-                class="w-full h-64 bg-gray-800 rounded-sm overflow-hidden relative mb-12 group border border-gray-700 dark:border-white/10 filter grayscale hover:grayscale-0 transition-all duration-700">
-                <!-- Interactive Map Iframe -->
+            <div class="map-wrap">
                 <iframe
                     src="https://yandex.ru/map-widget/v1/?ll=113.500892%2C52.031737&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjMxMjMwNBJL0KDQvtGB0YHQuNGPLCDQ—0LDQsdCw0LnQutCw0LvGMNGB0LrQuNC5INC60YDQsNC5LCDQp9C40YLQsCwgOTt0Lkg0L7Rh9C40YbQsCAzNyIKDTXlVkIVdFVWQg%2C%2C&z=17.09"
-                    width="100%" height="100%" frameborder="0" allowfullscreen="true"
-                    style="position:relative;"></iframe>
+                    allowfullscreen="true"></iframe>
             </div>
 
-            <div
-                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 dark:border-white/10">
+            <div class="footer-bottom">
                 <p>&copy; 2026 Адвокат Аюшиева С.Ж. Все права защищены.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors">Политика конфиденциальности</a>
-                </div>
+                <a href="#">Политика конфиденциальности</a>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- All JS at the very end -->
     <script>
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('scale-y-0');
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('open');
         });
 
-        // Sticky Header Effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-md', 'py-2');
-                header.classList.remove('py-4');
-            } else {
-                header.classList.remove('shadow-md', 'py-2');
-                header.classList.add('py-4');
-            }
+        // Sticky header
+        window.addEventListener('scroll', function () {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Smooth Scroll for Anchors
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // Smooth scroll + close mobile menu
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function (e) {
                 e.preventDefault();
-                menu.classList.add('scale-y-0'); // Close mobile menu
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.getElementById('mobile-menu').classList.remove('open');
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // --- Dark Mode Logic ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const themeIcons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-mobile')];
-
-        // Check local storage or system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            updateIcons('sun');
-        } else {
-            document.documentElement.classList.remove('dark');
-            updateIcons('moon');
-        }
-
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-                updateIcons('moon');
-            } else {
+        // Dark mode
+        var icons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-mobile')];
+        function setTheme(dark) {
+            if (dark) {
                 document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-                updateIcons('sun');
+                localStorage.setItem('theme', 'dark');
+                icons.forEach(function (i) { i.className = 'ph ph-sun'; });
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                icons.forEach(function (i) { i.className = 'ph ph-moon'; });
             }
         }
+        // Init
+        var prefersDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        setTheme(prefersDark);
 
-        function updateIcons(type) {
-            themeIcons.forEach(icon => {
-                icon.className = type === 'sun' ? 'ph ph-sun text-xl text-gold' : 'ph ph-moon text-xl';
-            });
-        }
-
-        themeToggle.addEventListener('click', toggleTheme);
-        themeToggleMobile.addEventListener('click', toggleTheme);
-
-        // --- Scroll Animations (Intersection Observer) ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-visible');
-                    observer.unobserve(entry.target); // Animate once
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-            // SAFE FALLBACK: Only hide elements if JS is actually running
-            el.classList.add('js-hidden');
-            observer.observe(el);
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            setTheme(!document.documentElement.classList.contains('dark'));
         });
+        document.getElementById('theme-toggle-mobile').addEventListener('click', function () {
+            setTheme(!document.documentElement.classList.contains('dark'));
+        });
+
+        // Scroll animations (progressive enhancement)
+        if ('IntersectionObserver' in window) {
+            document.querySelectorAll('.reveal').forEach(function (el) {
+                el.classList.add('hidden-anim');
+            });
+            var obs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('hidden-anim');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+        }
     </script>
 </body>
 
