@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адвокат Аюшиева С.Ж. — Юридическая помощь в Чите</title>
+    <meta name="description"
+        content="Профессиональная юридическая защита в Чите и Забайкальском крае. Адвокат Аюшиева Светлана Жадамбаевна.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/phosphor-icons"></script>
+
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#1a2a44',
+                            light: '#2a3d5e',
+                            dark: '#101a2b',
+                            deep: '#0f172a' // Very dark for Dark Mode BG
+                        },
+                        charcoal: '#2d2d2d',
+                        gold: {
+                            DEFAULT: '#c5a059',
+                            light: '#d4b675',
+                            dark: '#a88645'
+                        },
+                        offwhite: '#f9f9f9',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    container: {
+                        center: true,
+                        padding: '1.5rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(197, 160, 89, 0.3)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .glass-panel {
+                @apply bg-white/80 backdrop-blur-md border border-white/20 dark:bg-navy-dark/80 dark:border-white/10;
+            }
+            /* Animation Utility Classes */
+            .reveal-on-scroll {
+                @apply opacity-0 translate-y-8 transition-all duration-1000 ease-out;
+            }
+            .reveal-visible {
+                @apply opacity-100 translate-y-0;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #101a2b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5a059;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a88645;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-offwhite text-charcoal font-sans antialiased selection:bg-gold selection:text-white dark:bg-navy-deep dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Header -->
+    <header
+        class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-sm dark:bg-navy-dark/95 dark:border-b dark:border-white/5"
+        id="header">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <div
+                    class="w-10 h-10 bg-navy text-gold flex items-center justify-center rounded-sm font-serif text-xl font-bold border border-gold/30 dark:bg-navy-deep dark:border-gold/50">
+                    А
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="font-serif text-lg font-bold text-navy tracking-wide leading-none group-hover:text-gold transition-colors dark:text-gray-100">АЮШИЕВА
+                        С.Ж.</span>
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">Адвокат</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <a href="#services" class="hover:text-gold transition-colors py-2 relative group">
+                    Услуги
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#about" class="hover:text-gold transition-colors py-2 relative group">
+                    Обо мне
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#svo" class="hover:text-gold transition-colors py-2 relative group flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+                    СВО
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contacts" class="hover:text-gold transition-colors py-2 relative group">
+                    Контакты
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-6">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-full text-navy hover:bg-gray-100 dark:text-gold dark:hover:bg-white/10 transition-colors"
+                    title="Переключить тему">
+                    <i id="theme-icon" class="ph ph-moon text-xl"></i>
+                </button>
+
+                <a href="tel:89955538583"
+                    class="font-medium text-navy hover:text-gold transition-colors dark:text-white">8-995-553-85-83</a>
+                <a href="https://t.me/svetayurist" target="_blank"
+                    class="bg-navy text-white px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-gold transition-all duration-300 shadow-lg hover:shadow-gold/30 transform hover:-translate-y-0.5 dark:bg-gold dark:text-navy dark:hover:bg-white">
+                    Записаться
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button & Theme Toggle -->
+            <div class="md:hidden flex items-center gap-4">
+                <button id="theme-toggle-mobile" class="text-navy dark:text-gold">
+                    <i id="theme-icon-mobile" class="ph ph-moon text-2xl"></i>
+                </button>
+                <button class="text-navy dark:text-white p-2" id="mobile-menu-btn">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg transform origin-top scale-y-0 transition-transform duration-300 dark:bg-navy-dark dark:border-white/10"
+            id="mobile-menu">
+            <div class="p-4 flex flex-col gap-4">
+                <a href="#services"
+                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 dark:text-gray-200 dark:border-white/5">Услуги</a>
+                <a href="#about"
+                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 dark:text-gray-200 dark:border-white/5">Обо
+                    мне</a>
+                <a href="#svo"
+                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 flex items-center gap-2 dark:text-gray-200 dark:border-white/5">
+                    СВО <span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full">Важно</span>
+                </a>
+                <a href="#contacts"
+                    class="text-charcoal font-medium hover:text-gold py-2 border-b border-gray-50 dark:text-gray-200 dark:border-white/5">Контакты</a>
+                <a href="tel:89955538583" class="text-navy font-bold py-2 dark:text-gold">8-995-553-85-83</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-[100svh] pt-24 pb-12 flex items-center relative overflow-hidden dark:bg-navy-deep">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gray-100/50 -skew-x-12 translate-x-32 -z-10 dark:bg-navy/30">
+        </div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -z-10 dark:bg-gold/10"></div>
+
+        <div class="container mx-auto px-4 grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 space-y-8 reveal-on-scroll">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy/5 text-navy text-xs font-semibold tracking-wider uppercase border border-navy/10 dark:bg-white/10 dark:text-gray-200 dark:border-white/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+                    Читинская городская коллегия адвокатов
+                </div>
+
+                <h1
+                    class="font-serif text-4xl md:text-6xl lg:text-7xl text-navy font-medium leading-tight dark:text-white">
+                    Аюшиева <br>
+                    <span class="text-gold italic relative pr-4">
+                        Светлана
+                        <svg class="absolute bottom-2 right-0 w-full h-3 text-gold/20 -z-10" viewBox="0 0 100 10"
+                            preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z" fill="currentColor"></path>
+                        </svg>
+                    </span> <br>
+                    Жадамбаевна
+                </h1>
+
+                <p
+                    class="text-lg md:text-xl text-gray-600 max-w-xl leading-relaxed border-l-4 border-gold pl-6 dark:text-gray-300">
+                    Профессиональная юридическая защита в Чите и Забайкальском крае. Весь спектр юридических услуг: от
+                    консультаций до сложных судебных процессов.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="bg-navy text-white px-8 py-4 rounded-sm font-medium hover:bg-gold transition-all duration-300 shadow-xl hover:shadow-gold/30 text-center flex items-center justify-center gap-2 group dark:bg-gold dark:text-navy dark:hover:bg-white">
+                        Записаться на консультацию
+                        <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#services"
+                        class="bg-transparent border border-gray-300 text-navy px-8 py-4 rounded-sm font-medium hover:border-navy hover:bg-navy/5 transition-all duration-300 text-center dark:border-gray-600 dark:text-gray-200 dark:hover:bg-white/5 dark:hover:border-white">
+                        Узнать подробнее
+                    </a>
+                </div>
+
+                <div class="pt-8 flex items-center gap-8 text-sm text-gray-500 font-medium dark:text-gray-400">
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-scales text-2xl text-gold"></i>
+                        <span>15+ лет опыта</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-gavel text-2xl text-gold"></i>
+                        <span>98% успешных дел</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-5 relative reveal-on-scroll" style="transition-delay: 200ms;">
+                <div
+                    class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-navy-light">
+                    <img src="portrait.jpg" alt="Адвокат Аюшиева С.Ж." class="w-full h-auto object-cover aspect-[3/4]">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <div class="text-white">
+                            <p class="font-serif text-2xl">Ваш защитник</p>
+                            <p class="text-sm opacity-90">На страже ваших интересов</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Decorative Elements -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 border-2 border-gold/30 rounded-full z-0"></div>
+                <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-navy/5 rounded-full z-0 dark:bg-white/5"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white dark:bg-navy-dark transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                <h2 class="font-serif text-3xl md:text-5xl text-navy mb-4 dark:text-white">Экспертиза и Услуги</h2>
+                <div class="w-24 h-1 bg-gold mx-auto mb-6"></div>
+                <p class="text-gray-600 text-lg dark:text-gray-400">Комплексный подход к решению правовых вопросов любой
+                    сложности</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Cards -->
+                <div
+                    class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light">
+                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
+                    </div>
+                    <div
+                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
+                        <i class="ph ph-users-three text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Семейное право</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Развод, раздел имущества, алименты,
+                        споры о детях. Деликатное решение семейных конфликтов.</p>
+                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Бракоразводные
+                            процессы</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Алиментные
+                            обязательства</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
+                        Записаться <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
+                    style="transition-delay: 100ms;">
+                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
+                    </div>
+                    <div
+                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
+                        <i class="ph ph-house-line text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Жилищные и земельные споры
+                    </h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Приватизация, границы участков, споры
+                        о собственности, выселение, регистрация прав.</p>
+                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Сделки с недвижимостью
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Споры с застройщиками
+                        </li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
+                        Записаться <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
+                    style="transition-delay: 200ms;">
+                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
+                    </div>
+                    <div
+                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
+                        <i class="ph ph-briefcase text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Трудовые споры</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Восстановление на работе, взыскание
+                        задолженности по зарплате, защита прав работников.</p>
+                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Незаконное увольнение
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Компенсации</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
+                        Записаться <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div
+                    class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light">
+                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
+                    </div>
+                    <div
+                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
+                        <i class="ph ph-gavel text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Уголовная защита</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Защита на стадии следствия, дознания и
+                        в суде. Профессиональная поддержка в сложных ситуациях.</p>
+                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Следственные действия
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Судебное
+                            представительство</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
+                        Записаться <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
+                    style="transition-delay: 100ms;">
+                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
+                    </div>
+                    <div
+                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
+                        <i class="ph ph-scroll text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Наследственные дела</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Оформление наследства, оспаривание
+                        завещаний, восстановление сроков, защита прав наследников.</p>
+                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Споры между
+                            наследниками</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Нотариальные вопросы
+                        </li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
+                        Записаться <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="reveal-on-scroll group p-8 border border-gray-100 bg-offwhite hover:bg-white hover:shadow-soft transition-all duration-300 rounded-sm relative overflow-hidden dark:bg-navy-deep dark:border-white/5 dark:hover:bg-navy-light"
+                    style="transition-delay: 200ms;">
+                    <div class="absolute top-0 left-0 w-1 h-0 bg-gold group-hover:h-full transition-all duration-300">
+                    </div>
+                    <div
+                        class="w-14 h-14 bg-navy/5 text-navy rounded-full flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-gold transition-colors duration-300 dark:bg-white/10 dark:text-gold dark:group-hover:bg-gold dark:group-hover:text-navy">
+                        <i class="ph ph-bank text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy mb-3 dark:text-white">Кредитные споры</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">Долговые обязательства, споры с
+                        банками, банкротство физических лиц, защита от коллекторов.</p>
+                    <ul class="text-sm text-gray-500 space-y-2 mb-6 dark:text-gray-500">
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Снижение неустоек</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-check text-gold"></i> Реструктуризация</li>
+                    </ul>
+                    <a href="https://t.me/svetayurist" target="_blank"
+                        class="text-navy font-semibold text-sm hover:text-gold transition-colors inline-flex items-center gap-1 dark:text-gold dark:hover:text-white">
+                        Записаться <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about"
+        class="py-20 bg-navy text-white relative overflow-hidden dark:bg-navy-deep dark:border-t dark:border-white/5">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 reveal-on-scroll">
+                    <h2 class="font-serif text-3xl md:text-5xl mb-6">Обо мне</h2>
+                    <div class="w-16 h-1 bg-gold mb-6"></div>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Я практикующий адвокат с большим опытом работы в сфере гражданского и уголовного права. Уже
+                        много лет я помогаю людям решать правовые вопросы, защищаю их интересы в судах и государственных
+                        органах.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Моя главная цель — защита интересов клиентов и достижение результата. Я всегда предлагаю
+                        индивидуальный подход, внимательно изучаю детали дела и нахожу оптимальное решение.
+                    </p>
+                    <div class="pt-6">
+                        <blockquote class="border-l-4 border-gold pl-6 italic text-xl text-gray-200">
+                            "Я всегда ориентируюсь на результат, внимательно подхожу к каждому делу и ставлю на первое
+                            место защиту интересов клиента."
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="relative reveal-on-scroll" style="transition-delay: 200ms;">
+                    <div class="bg-white/5 backdrop-blur-sm p-8 rounded-sm border border-white/10">
+                        <h3 class="font-serif text-2xl mb-6 text-gold">Мои принципы</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gold/20 flex items-center justify-center rounded-full shrink-0">
+                                    <i class="ph ph-shield-check text-2xl text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Честность и Доверие</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Открытый диалог с клиентом о перспективах
+                                        дела.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gold/20 flex items-center justify-center rounded-full shrink-0">
+                                    <i class="ph ph-lock-key text-2xl text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Конфиденциальность</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Полная защита информации и адвокатская тайна.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gold/20 flex items-center justify-center rounded-full shrink-0">
+                                    <i class="ph ph-target text-2xl text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Результативность</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Работа на достижение конкретных целей клиента.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SVO Support Section -->
+    <section id="svo" class="py-20 bg-gray-50 relative dark:bg-navy-dark transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div
+                class="reveal-on-scroll bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:bg-navy-deep dark:border-white/10">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-10 md:p-14 space-y-6">
+                        <div
+                            class="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-sm font-bold uppercase tracking-wider mb-2 dark:bg-red-900/30 dark:text-red-400">
+                            Особое внимание
+                        </div>
+                        <h2 class="font-serif text-3xl md:text-4xl text-navy dark:text-white">Поддержка участников СВО
+                        </h2>
+                        <p class="text-gray-600 text-lg dark:text-gray-300">
+                            Оказываю квалифицированную юридическую помощь участникам специальной военной операции и их
+                            семьям. Полное сопровождение в получении положенных льгот и выплат.
+                        </p>
+
+                        <ul class="space-y-4 pt-4">
+                            <li class="flex items-start gap-3">
+                                <i
+                                    class="ph ph-check-circle text-2xl text-red-600 shrink-0 mt-0.5 dark:text-red-500"></i>
+                                <div>
+                                    <strong class="text-navy block dark:text-gray-200">Выплаты по ранению</strong>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400">Помощь в оформлении и
+                                        получении страховых выплат.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i
+                                    class="ph ph-check-circle text-2xl text-red-600 shrink-0 mt-0.5 dark:text-red-500"></i>
+                                <div>
+                                    <strong class="text-navy block dark:text-gray-200">Статус ветерана боевых
+                                        действий</strong>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400">Сбор документов и
+                                        представление интересов.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i
+                                    class="ph ph-check-circle text-2xl text-red-600 shrink-0 mt-0.5 dark:text-red-500"></i>
+                                <div>
+                                    <strong class="text-navy block dark:text-gray-200">Социальные гарантии</strong>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400">Кредитные каникулы, льготы
+                                        для семей, выплаты в случае гибели.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-navy relative overflow-hidden flex items-center justify-center p-12 dark:bg-navy-light/20">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]">
+                        </div>
+                        <div class="relative z-10 text-center text-white space-y-6">
+                            <i class="ph ph-hand-heart text-7xl text-gold mb-4"></i>
+                            <h3 class="font-serif text-2xl">Ваша защита — наш долг</h3>
+                            <p class="opacity-80">
+                                Юридическая поддержка тех, кто защищает Родину.
+                            </p>
+                            <a href="https://t.me/svetayurist" target="_blank"
+                                class="inline-block bg-white text-navy px-8 py-3 rounded-full font-bold hover:bg-gold hover:text-white transition-all duration-300">
+                                Получить консультацию
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAKS Secure Communication (Modified) -->
+    <section
+        class="py-16 bg-navy text-white text-center relative overflow-hidden dark:bg-navy-deep dark:border-t dark:border-white/5">
+        <div class="absolute inset-0 bg-gradient-to-r from-navy via-[#2a3d5e] to-navy opacity-90 dark:opacity-50"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto space-y-8 reveal-on-scroll">
+                <div
+                    class="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-2xl mb-4 backdrop-blur-sm border border-white/20">
+                    <i class="ph ph-shield-check text-4xl text-gold"></i>
+                </div>
+                <h2 class="font-serif text-3xl md:text-4xl text-gold">Безопасность и Конфиденциальность</h2>
+                <div class="h-px w-32 bg-gold/50 mx-auto"></div>
+                <p class="text-xl text-gray-300">
+                    Приоритет моей работы — конфиденциальность. Свяжитесь со мной напрямую через защищенные мессенджеры.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contacts (Refactored) -->
+    <footer id="contacts" class="bg-charcoal text-white pt-20 pb-10 dark:bg-navy-dark">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+                <!-- Info -->
+                <div class="lg:col-span-5 space-y-8 reveal-on-scroll">
+                    <div>
+                        <h2 class="font-serif text-3xl mb-2">Аюшиева С.Ж.</h2>
+                        <p class="text-gold tracking-widest text-sm uppercase">Адвокат</p>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Юридическая помощь в Чите и Забайкальском крае. Честность, профессионализм и индивидуальный
+                        подход к каждому делу.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center shrink-0">
+                                <i class="ph ph-map-pin text-xl text-gold"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Адрес офиса
+                                </h3>
+                                <p class="text-white">г. Чита, ул. 9 Января, д. 37, оф. 214</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center shrink-0">
+                                <i class="ph ph-phone text-xl text-gold"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Телефоны</h3>
+                                <div class="space-y-1">
+                                    <a href="tel:89955538583"
+                                        class="block text-white hover:text-gold transition-colors">8-995-553-85-83</a>
+                                    <a href="tel:89294812131"
+                                        class="block text-white hover:text-gold transition-colors">8-929-481-21-31</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center shrink-0">
+                                <i class="ph ph-envelope text-xl text-gold"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Email</h3>
+                                <a href="mailto:cvetlanaayushieva@mail.ru"
+                                    class="text-white hover:text-gold transition-colors">cvetlanaayushieva@mail.ru</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons (Replaced Form) -->
+                <div class="lg:col-span-7 flex items-center">
+                    <div class="w-full bg-white/5 p-8 md:p-12 rounded-sm border border-white/10 reveal-on-scroll"
+                        style="transition-delay: 150ms;">
+                        <h3 class="font-serif text-2xl text-white mb-8 text-center">Связаться удобным способом</h3>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Telegram Button -->
+                            <a href="https://t.me/svetayurist" target="_blank"
+                                class="group flex flex-col items-center justify-center gap-3 p-6 bg-[#2AABEE]/10 border border-[#2AABEE]/30 rounded-lg hover:bg-[#2AABEE] transition-all duration-300 transform hover:-translate-y-1">
+                                <i
+                                    class="ph ph-telegram-logo text-5xl text-[#2AABEE] group-hover:text-white transition-colors"></i>
+                                <span class="text-lg font-bold text-white">Написать в Telegram</span>
+                                <span class="text-xs text-gray-400 group-hover:text-white/80">@svetayurist</span>
+                            </a>
+
+                            <!-- MAKS Button -->
+                            <a href="#"
+                                class="group flex flex-col items-center justify-center gap-3 p-6 bg-gold/10 border border-gold/30 rounded-lg hover:bg-gold transition-all duration-300 transform hover:-translate-y-1">
+                                <div
+                                    class="w-12 h-12 flex items-center justify-center rounded-lg bg-gold/20 text-gold group-hover:bg-white group-hover:text-gold transition-colors">
+                                    <i class="ph ph-shield-check text-3xl"></i>
+                                </div>
+                                <span class="text-lg font-bold text-white">Написать в МАКС</span>
+                                <span class="text-xs text-gray-400 group-hover:text-white/80">Защищенная связь</span>
+                            </a>
+                        </div>
+
+                        <!-- Added Telegram Channel Button (Secondary) -->
+                        <div class="mt-6 text-center">
+                            <a href="https://t.me/asyurist_chat" target="_blank"
+                                class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm hover:underline">
+                                <i class="ph ph-users"></i> Подписаться на мой канал в Telegram
+                            </a>
+                        </div>
+
+                        <p class="text-sm text-center text-gray-500 mt-6">
+                            Отвечаю на сообщения в рабочее время с 09:00 до 18:00
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div
+                class="w-full h-64 bg-gray-800 rounded-sm overflow-hidden relative mb-12 group border border-gray-700 dark:border-white/10 filter grayscale hover:grayscale-0 transition-all duration-700">
+                <!-- Interactive Map Iframe -->
+                <iframe
+                    src="https://yandex.ru/map-widget/v1/?ll=113.500892%2C52.031737&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjMxMjMwNBJL0KDQvtGB0YHQuNGPLCDQ—0LDQsdCw0LnQutCw0LvGMNGB0LrQuNC5INC60YDQsNC5LCDQp9C40YLQsCwgOTt0Lkg0L7Rh9C40YbQsCAzNyIKDTXlVkIVdFVWQg%2C%2C&z=17.09"
+                    width="100%" height="100%" frameborder="0" allowfullscreen="true"
+                    style="position:relative;"></iframe>
+            </div>
+
+            <div
+                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 dark:border-white/10">
+                <p>&copy; 2026 Адвокат Аюшиева С.Ж. Все права защищены.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Политика конфиденциальности</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('scale-y-0');
+        });
+
+        // Sticky Header Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md', 'py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.remove('shadow-md', 'py-2');
+                header.classList.add('py-4');
+            }
+        });
+
+        // Smooth Scroll for Anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('scale-y-0'); // Close mobile menu
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // --- Dark Mode Logic ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const themeIcons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-mobile')];
+
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            updateIcons('sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateIcons('moon');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                updateIcons('moon');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                updateIcons('sun');
+            }
+        }
+
+        function updateIcons(type) {
+            themeIcons.forEach(icon => {
+                icon.className = type === 'sun' ? 'ph ph-sun text-xl text-gold' : 'ph ph-moon text-xl';
+            });
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+
+        // --- Scroll Animations (Intersection Observer) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target); // Animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
