@@ -32,7 +32,7 @@
                             DEFAULT: '#1a2a44',
                             light: '#2a3d5e',
                             dark: '#101a2b',
-                            deep: '#0f172a' // Very dark for Dark Mode BG
+                            deep: '#0f172a'
                         },
                         charcoal: '#2d2d2d',
                         gold: {
@@ -75,12 +75,15 @@
             .glass-panel {
                 @apply bg-white/80 backdrop-blur-md border border-white/20 dark:bg-navy-dark/80 dark:border-white/10;
             }
-            /* Animation Utility Classes */
+            /* SAFE ANIMATION: Default is VISIBLE. JS adds hidden state only if it runs. */
             .reveal-on-scroll {
-                @apply opacity-0 translate-y-8 transition-all duration-1000 ease-out;
+                @apply transition-all duration-1000 ease-out;
+            }
+            .js-hidden {
+                @apply opacity-0 translate-y-8;
             }
             .reveal-visible {
-                @apply opacity-100 translate-y-0;
+                @apply opacity-100 translate-y-0 !important;
             }
         }
         
@@ -787,6 +790,8 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            // SAFE FALLBACK: Only hide elements if JS is actually running
+            el.classList.add('js-hidden');
             observer.observe(el);
         });
     </script>
